@@ -38,8 +38,8 @@ java -jar buildfarm-server_deploy.jar
 docker run --add_host= 192.168.0.14
 
 
+#  --name buildfarm-redis \
 docker run -d \
-  --name buildfarm-redis \
   -p 6379:6379 \
   --add-host buildfarm-server:192.168.0.14 \
   redis:5.0.9
@@ -49,16 +49,15 @@ docker run \
   -p 8980:8980 \
   -v $(pwd)/examples:/config \
   192.168.0.14:5000/tf-gpu-bb \
-  java -jar buildfarm-server_deploy.jar /config/shard-server.config.example --port=8980 --pub
-lic_name=192.168.0.14:8980
+  java -jar buildfarm-server_deploy.jar /config/shard-server.config.example --port=8980 --public_name=192.168.0.14:8980
 
 docker run \
   --add-host buildfarm-server:192.168.0.14 \
-  -p 8980:8980 \
+  -p 8981:8981 \
   -v $(pwd)/examples:/config \
+  -v /tmp/worker:/tmp/worker \
   192.168.0.14:5000/tf-gpu-bb \
-  java -jar buildfarm-server_deploy.jar /config/shard-worker.config.example  --port=8981 --pub
-lic_name=192.168.0.14:8981
+  java -jar :buildfarm-shard-worker_deploy.jar /config/shard-worker.config.example  --port=8981 --public_name=192.168.0.14:8981
 
 
   docker run -d --name buildfarm-worker --privileged -v $(pwd)/examples:/var/lib/buildfarm-shard-worker \
