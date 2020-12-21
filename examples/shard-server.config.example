@@ -54,7 +54,7 @@ instances {
     redis_shard_backplane_config: {
       # The URI of the redis cluster endpoint. This must
       # be a single URI, regardless of the layout of the cluster
-      redis_uri: "redis://localhost:6379"
+      redis_uri: "redis://buildfarm-server:6379"
 
       # The password used to authenticate redis clients, if required
       # redis_password: "mypass"

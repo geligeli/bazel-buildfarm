@@ -56,11 +56,11 @@ cas: {
 
     # limit for contents of files retained
     # from CAS in the cache
-    max_size_bytes: 2147483648 # 2 * 1024 * 1024 * 1024
+    max_size_bytes: 214748364800 # 200GB
 
     # limit for content size of files retained
     # from CAS in the cache
-    max_entry_size_bytes: 2147483648 # 2 * 1024 * 1024 * 1024
+    max_entry_size_bytes: 214748364800 # 200GB
 
     # whether the file directories bidirectional mapping should be stored in memory (HashMap) or
     # in sqlite
@@ -85,10 +85,10 @@ cas: {
 #}
 
 # the number of concurrently available slots in the execute phase
-execute_stage_width: 1
+execute_stage_width: 16
 
 # the number of concurrently available slots in the input fetch phase
-input_fetch_stage_width: 1
+input_fetch_stage_width: 16
 
 # Use an input directory creation strategy which creates a single
 # directory tree at the highest level of the input tree containing
@@ -124,7 +124,7 @@ maximum_action_timeout: {
 redis_shard_backplane_config: {
   # The URI of the redis cluster endpoint. This must
   # be a single URI, regardless of the layout of the cluster
-  redis_uri: "redis://localhost:6379"
+  redis_uri: "redis://buildfarm-redis:6379"
 
   # The password used to authenticate redis clients, if required
   # redis_password: "mypass"
